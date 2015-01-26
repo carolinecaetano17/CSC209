@@ -10,8 +10,8 @@ int main(int argc, char **argv){
 
 	char * fromName = argv[1];
 	char * toName = argv[2];
-	int *values = malloc(2 * sizeof(int));	
-	int newValue;
+	short *values = malloc(2 * sizeof(int));	
+	short newValue;
 	printf("%s %s\n",fromName,toName );
 
 	FILE *from = fopen ( fromName,"rb" );
@@ -28,16 +28,16 @@ int main(int argc, char **argv){
 
   	fread (buffer,1,44,from);
   	fwrite ( buffer, 1, 44, to );
-  	printf("Wrote\n");
+  	printf("Wrote %d\n",sizeof(short));
   	while (fgetc(from) != EOF) {
   		//printf("W1\n");
-  		fread (values,sizeof(int),2,from);
+  		fread (values,sizeof(short),2,from);
   		newValue = 0;
   		newValue += values[0];
   		newValue += values[1];
   		newValue = newValue/2;
   		values[0] = values[1] = newValue;
-  		fwrite ( values,sizeof(int),2, to );
+  		fwrite ( values,sizeof(short),2, to );
   		
   	}
 
